@@ -155,6 +155,95 @@ export type Database = {
           },
         ]
       }
+      dashboard_banners: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          expires_at: string | null
+          id: string
+          image_url: string
+          is_active: boolean | null
+          link_text: string | null
+          link_url: string | null
+          priority: number | null
+          starts_at: string | null
+          title: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          expires_at?: string | null
+          id?: string
+          image_url: string
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          priority?: number | null
+          starts_at?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          expires_at?: string | null
+          id?: string
+          image_url?: string
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          priority?: number | null
+          starts_at?: string | null
+          title?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      deliveries: {
+        Row: {
+          created_at: string | null
+          delivered_at: string | null
+          delivery_data: Json | null
+          id: string
+          product_id: string
+          product_type: string
+          transaction_id: string | null
+          user_id: string
+          viewed_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          delivered_at?: string | null
+          delivery_data?: Json | null
+          id?: string
+          product_id: string
+          product_type: string
+          transaction_id?: string | null
+          user_id: string
+          viewed_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          delivered_at?: string | null
+          delivery_data?: Json | null
+          id?: string
+          product_id?: string
+          product_type?: string
+          transaction_id?: string | null
+          user_id?: string
+          viewed_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deliveries_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       destinations: {
         Row: {
           chat_id: string
@@ -207,6 +296,326 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      funnel_edges: {
+        Row: {
+          created_at: string | null
+          funnel_id: string
+          id: string
+          source_handle: string | null
+          source_node_id: string
+          target_node_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          funnel_id: string
+          id?: string
+          source_handle?: string | null
+          source_node_id: string
+          target_node_id: string
+        }
+        Update: {
+          created_at?: string | null
+          funnel_id?: string
+          id?: string
+          source_handle?: string | null
+          source_node_id?: string
+          target_node_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "funnel_edges_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "funnel_edges_source_node_id_fkey"
+            columns: ["source_node_id"]
+            isOneToOne: false
+            referencedRelation: "funnel_nodes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "funnel_edges_target_node_id_fkey"
+            columns: ["target_node_id"]
+            isOneToOne: false
+            referencedRelation: "funnel_nodes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      funnel_nodes: {
+        Row: {
+          content: Json | null
+          created_at: string | null
+          funnel_id: string
+          id: string
+          node_type: string | null
+          position_x: number | null
+          position_y: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          content?: Json | null
+          created_at?: string | null
+          funnel_id: string
+          id?: string
+          node_type?: string | null
+          position_x?: number | null
+          position_y?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          content?: Json | null
+          created_at?: string | null
+          funnel_id?: string
+          id?: string
+          node_type?: string | null
+          position_x?: number | null
+          position_y?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "funnel_nodes_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      funnel_payments: {
+        Row: {
+          amount_cents: number
+          created_at: string | null
+          currency: string | null
+          delivered_at: string | null
+          delivery_status: string | null
+          fbclid: string | null
+          funnel_id: string
+          gclid: string | null
+          id: string
+          lead_chat_id: string | null
+          lead_name: string | null
+          paid_at: string | null
+          pix_code: string | null
+          pix_expiration: string | null
+          pix_qrcode: string | null
+          product_id: string | null
+          provider: string | null
+          provider_payment_id: string | null
+          reminded_at: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string | null
+          currency?: string | null
+          delivered_at?: string | null
+          delivery_status?: string | null
+          fbclid?: string | null
+          funnel_id: string
+          gclid?: string | null
+          id?: string
+          lead_chat_id?: string | null
+          lead_name?: string | null
+          paid_at?: string | null
+          pix_code?: string | null
+          pix_expiration?: string | null
+          pix_qrcode?: string | null
+          product_id?: string | null
+          provider?: string | null
+          provider_payment_id?: string | null
+          reminded_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string | null
+          currency?: string | null
+          delivered_at?: string | null
+          delivery_status?: string | null
+          fbclid?: string | null
+          funnel_id?: string
+          gclid?: string | null
+          id?: string
+          lead_chat_id?: string | null
+          lead_name?: string | null
+          paid_at?: string | null
+          pix_code?: string | null
+          pix_expiration?: string | null
+          pix_qrcode?: string | null
+          product_id?: string | null
+          provider?: string | null
+          provider_payment_id?: string | null
+          reminded_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "funnel_payments_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "funnel_payments_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "funnel_products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      funnel_products: {
+        Row: {
+          created_at: string | null
+          currency: string | null
+          delivery_content: string | null
+          delivery_message: string | null
+          delivery_type: string | null
+          description: string | null
+          funnel_id: string
+          group_chat_id: string | null
+          group_invite_link: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          payment_method: string | null
+          price_cents: number
+          product_type: string | null
+          provider: string | null
+          provider_product_id: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          currency?: string | null
+          delivery_content?: string | null
+          delivery_message?: string | null
+          delivery_type?: string | null
+          description?: string | null
+          funnel_id: string
+          group_chat_id?: string | null
+          group_invite_link?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          payment_method?: string | null
+          price_cents: number
+          product_type?: string | null
+          provider?: string | null
+          provider_product_id?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          currency?: string | null
+          delivery_content?: string | null
+          delivery_message?: string | null
+          delivery_type?: string | null
+          description?: string | null
+          funnel_id?: string
+          group_chat_id?: string | null
+          group_invite_link?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          payment_method?: string | null
+          price_cents?: number
+          product_type?: string | null
+          provider?: string | null
+          provider_product_id?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "funnel_products_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      funnel_templates: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          edges: Json | null
+          id: string
+          is_active: boolean | null
+          is_free: boolean | null
+          name: string
+          nodes: Json | null
+          schema_version: number | null
+          template_version: number | null
+          updated_at: string | null
+          variables: Json | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          edges?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_free?: boolean | null
+          name: string
+          nodes?: Json | null
+          schema_version?: number | null
+          template_version?: number | null
+          updated_at?: string | null
+          variables?: Json | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          edges?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_free?: boolean | null
+          name?: string
+          nodes?: Json | null
+          schema_version?: number | null
+          template_version?: number | null
+          updated_at?: string | null
+          variables?: Json | null
+        }
+        Relationships: []
       }
       funnels: {
         Row: {
@@ -353,6 +762,114 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      integrations: {
+        Row: {
+          access_token: string
+          api_token: string | null
+          created_at: string | null
+          environment: string | null
+          id: string
+          last_sync_at: string | null
+          provider: string | null
+          provider_email: string | null
+          provider_name: string | null
+          provider_user_id: string | null
+          refresh_token: string | null
+          status: string | null
+          token_expires_at: string | null
+          tracking_enabled: boolean | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          api_token?: string | null
+          created_at?: string | null
+          environment?: string | null
+          id?: string
+          last_sync_at?: string | null
+          provider?: string | null
+          provider_email?: string | null
+          provider_name?: string | null
+          provider_user_id?: string | null
+          refresh_token?: string | null
+          status?: string | null
+          token_expires_at?: string | null
+          tracking_enabled?: boolean | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          api_token?: string | null
+          created_at?: string | null
+          environment?: string | null
+          id?: string
+          last_sync_at?: string | null
+          provider?: string | null
+          provider_email?: string | null
+          provider_name?: string | null
+          provider_user_id?: string | null
+          refresh_token?: string | null
+          status?: string | null
+          token_expires_at?: string | null
+          tracking_enabled?: boolean | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          expires_at: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          link_text: string | null
+          link_url: string | null
+          message: string
+          priority: number | null
+          starts_at: string | null
+          title: string
+          type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          expires_at?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          message: string
+          priority?: number | null
+          starts_at?: string | null
+          title: string
+          type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          expires_at?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          message?: string
+          priority?: number | null
+          starts_at?: string | null
+          title?: string
+          type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       plans: {
         Row: {
@@ -536,6 +1053,122 @@ export type Database = {
         }
         Relationships: []
       }
+      telegram_logs: {
+        Row: {
+          created_at: string | null
+          event_type: string
+          funnel_id: string | null
+          id: string
+          node_id: string | null
+          payload: Json | null
+          session_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_type: string
+          funnel_id?: string | null
+          id?: string
+          node_id?: string | null
+          payload?: Json | null
+          session_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_type?: string
+          funnel_id?: string | null
+          id?: string
+          node_id?: string | null
+          payload?: Json | null
+          session_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "telegram_logs_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "telegram_logs_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "telegram_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      telegram_sessions: {
+        Row: {
+          chat_id: string
+          created_at: string | null
+          current_node_id: string | null
+          fbclid: string | null
+          funnel_id: string
+          gclid: string | null
+          history: Json | null
+          id: string
+          is_finished: boolean | null
+          last_message_at: string | null
+          telegram_user_id: string | null
+          updated_at: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          variables: Json | null
+        }
+        Insert: {
+          chat_id: string
+          created_at?: string | null
+          current_node_id?: string | null
+          fbclid?: string | null
+          funnel_id: string
+          gclid?: string | null
+          history?: Json | null
+          id?: string
+          is_finished?: boolean | null
+          last_message_at?: string | null
+          telegram_user_id?: string | null
+          updated_at?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          variables?: Json | null
+        }
+        Update: {
+          chat_id?: string
+          created_at?: string | null
+          current_node_id?: string | null
+          fbclid?: string | null
+          funnel_id?: string
+          gclid?: string | null
+          history?: Json | null
+          id?: string
+          is_finished?: boolean | null
+          last_message_at?: string | null
+          telegram_user_id?: string | null
+          updated_at?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          variables?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "telegram_sessions_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       transactions: {
         Row: {
           amount_cents: number
@@ -601,6 +1234,35 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      user_notification_reads: {
+        Row: {
+          id: string
+          notification_id: string
+          read_at: string | null
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          notification_id: string
+          read_at?: string | null
+          user_id: string
+        }
+        Update: {
+          id?: string
+          notification_id?: string
+          read_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_notification_reads_notification_id_fkey"
+            columns: ["notification_id"]
+            isOneToOne: false
+            referencedRelation: "notifications"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
