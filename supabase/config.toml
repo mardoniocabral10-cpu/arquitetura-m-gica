@@ -1,1 +1,76 @@
 project_id = "zapotlsfkamhofwizomn"
+
+[functions.telegram-bot]
+verify_jwt = true
+
+[functions.create-payment]
+verify_jwt = true
+
+[functions.create-product-payment]
+verify_jwt = true
+
+[functions.payment-webhook]
+verify_jwt = false
+
+[functions.campaign-dispatch]
+verify_jwt = true
+
+[functions.campaign-runner]
+verify_jwt = false
+
+[functions.funnel-webhook]
+verify_jwt = false
+
+[functions.wpp-api]
+verify_jwt = true
+
+[functions.wpp-webhook]
+verify_jwt = false
+
+[functions.mercadopago-oauth]
+verify_jwt = true
+
+[functions.mercadopago-callback]
+verify_jwt = false
+
+[functions.mercadopago-payment]
+verify_jwt = false
+
+[functions.mercadopago-webhook]
+verify_jwt = false
+
+[functions.payment-reminder]
+verify_jwt = false
+
+[functions.utmify-track]
+verify_jwt = false
+
+[functions.social-oauth]
+verify_jwt = true
+
+[functions.social-post]
+verify_jwt = true
+
+[functions.test-destination]
+verify_jwt = true
+
+[functions.admin-update-email]
+verify_jwt = true
+
+[functions.process-referral]
+verify_jwt = false
+
+[functions.cloaker-media]
+verify_jwt = false
+
+[functions.content-sync-proxy]
+verify_jwt = false
+
+[functions.account-manager-action]
+verify_jwt = true
+
+[functions.instagram-engagement]
+verify_jwt = false
+
+[functions.instagram-login]
+verify_jwt = false
