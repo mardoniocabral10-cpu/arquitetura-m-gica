@@ -155,6 +155,235 @@ export type Database = {
           },
         ]
       }
+      cloaker_clicks: {
+        Row: {
+          browser: string | null
+          city: string | null
+          clicked_at: string | null
+          country: string | null
+          device_type: string | null
+          id: string
+          ip_address: string | null
+          is_bot: boolean | null
+          is_vpn: boolean | null
+          link_id: string
+          os: string | null
+          redirect_target: string | null
+          referrer: string | null
+          user_agent: string | null
+          was_blocked: boolean | null
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          clicked_at?: string | null
+          country?: string | null
+          device_type?: string | null
+          id?: string
+          ip_address?: string | null
+          is_bot?: boolean | null
+          is_vpn?: boolean | null
+          link_id: string
+          os?: string | null
+          redirect_target?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+          was_blocked?: boolean | null
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          clicked_at?: string | null
+          country?: string | null
+          device_type?: string | null
+          id?: string
+          ip_address?: string | null
+          is_bot?: boolean | null
+          is_vpn?: boolean | null
+          link_id?: string
+          os?: string | null
+          redirect_target?: string | null
+          referrer?: string | null
+          user_agent?: string | null
+          was_blocked?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cloaker_clicks_link_id_fkey"
+            columns: ["link_id"]
+            isOneToOne: false
+            referencedRelation: "cloaker_links"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cloaker_links: {
+        Row: {
+          allowed_countries: string[] | null
+          block_bots: boolean | null
+          block_vpn: boolean | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          offer_url: string
+          safe_url: string
+          slug: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          allowed_countries?: string[] | null
+          block_bots?: boolean | null
+          block_vpn?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          offer_url: string
+          safe_url: string
+          slug: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          allowed_countries?: string[] | null
+          block_bots?: boolean | null
+          block_vpn?: boolean | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          offer_url?: string
+          safe_url?: string
+          slug?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      cloaker_media: {
+        Row: {
+          allowed_countries: string[] | null
+          block_bots: boolean | null
+          block_vpn: boolean | null
+          created_at: string | null
+          destination_url: string | null
+          id: string
+          is_active: boolean | null
+          media_type: string | null
+          name: string
+          offer_file_path: string | null
+          offer_url: string | null
+          safe_file_path: string | null
+          safe_url: string | null
+          slug: string
+          total_views: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          allowed_countries?: string[] | null
+          block_bots?: boolean | null
+          block_vpn?: boolean | null
+          created_at?: string | null
+          destination_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          media_type?: string | null
+          name: string
+          offer_file_path?: string | null
+          offer_url?: string | null
+          safe_file_path?: string | null
+          safe_url?: string | null
+          slug: string
+          total_views?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          allowed_countries?: string[] | null
+          block_bots?: boolean | null
+          block_vpn?: boolean | null
+          created_at?: string | null
+          destination_url?: string | null
+          id?: string
+          is_active?: boolean | null
+          media_type?: string | null
+          name?: string
+          offer_file_path?: string | null
+          offer_url?: string | null
+          safe_file_path?: string | null
+          safe_url?: string | null
+          slug?: string
+          total_views?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      cloaker_media_views: {
+        Row: {
+          browser: string | null
+          city: string | null
+          country: string | null
+          device_type: string | null
+          id: string
+          ip_address: string | null
+          is_bot: boolean | null
+          is_vpn: boolean | null
+          media_id: string
+          os: string | null
+          referrer: string | null
+          served_type: string | null
+          user_agent: string | null
+          viewed_at: string | null
+          was_blocked: boolean | null
+        }
+        Insert: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          device_type?: string | null
+          id?: string
+          ip_address?: string | null
+          is_bot?: boolean | null
+          is_vpn?: boolean | null
+          media_id: string
+          os?: string | null
+          referrer?: string | null
+          served_type?: string | null
+          user_agent?: string | null
+          viewed_at?: string | null
+          was_blocked?: boolean | null
+        }
+        Update: {
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          device_type?: string | null
+          id?: string
+          ip_address?: string | null
+          is_bot?: boolean | null
+          is_vpn?: boolean | null
+          media_id?: string
+          os?: string | null
+          referrer?: string | null
+          served_type?: string | null
+          user_agent?: string | null
+          viewed_at?: string | null
+          was_blocked?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cloaker_media_views_media_id_fkey"
+            columns: ["media_id"]
+            isOneToOne: false
+            referencedRelation: "cloaker_media"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dashboard_banners: {
         Row: {
           created_at: string | null
@@ -763,6 +992,307 @@ export type Database = {
           },
         ]
       }
+      instagram_accounts: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          deliverable_email: string | null
+          deliverable_info: string | null
+          deliverable_login: string | null
+          deliverable_notes: string | null
+          deliverable_password: string | null
+          description: string | null
+          engagement_rate: number | null
+          followers: number | null
+          following: number | null
+          id: string
+          image_url: string | null
+          is_sold: boolean | null
+          is_verified: boolean | null
+          niche: string | null
+          posts_count: number | null
+          price_cents: number
+          sold_at: string | null
+          sold_to_user_id: string | null
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_email?: string | null
+          deliverable_info?: string | null
+          deliverable_login?: string | null
+          deliverable_notes?: string | null
+          deliverable_password?: string | null
+          description?: string | null
+          engagement_rate?: number | null
+          followers?: number | null
+          following?: number | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          is_verified?: boolean | null
+          niche?: string | null
+          posts_count?: number | null
+          price_cents: number
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_email?: string | null
+          deliverable_info?: string | null
+          deliverable_login?: string | null
+          deliverable_notes?: string | null
+          deliverable_password?: string | null
+          description?: string | null
+          engagement_rate?: number | null
+          followers?: number | null
+          following?: number | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          is_verified?: boolean | null
+          niche?: string | null
+          posts_count?: number | null
+          price_cents?: number
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+          username?: string
+        }
+        Relationships: []
+      }
+      instagram_engagement_blocked: {
+        Row: {
+          blocked_at: string | null
+          blocked_by: string
+          id: string
+          instagram_account_id: string | null
+          reason: string
+          user_id: string | null
+        }
+        Insert: {
+          blocked_at?: string | null
+          blocked_by: string
+          id?: string
+          instagram_account_id?: string | null
+          reason: string
+          user_id?: string | null
+        }
+        Update: {
+          blocked_at?: string | null
+          blocked_by?: string
+          id?: string
+          instagram_account_id?: string | null
+          reason?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      instagram_engagement_configs: {
+        Row: {
+          auto_variations: boolean | null
+          comments: Json | null
+          consecutive_errors: number | null
+          cooldown_reason: string | null
+          cooldown_until: string | null
+          created_at: string | null
+          daily_count: number | null
+          daily_limit: number | null
+          end_hour: number | null
+          id: string
+          instagram_account_id: string
+          is_active: boolean | null
+          last_comment_at: string | null
+          max_delay_seconds: number | null
+          min_delay_seconds: number | null
+          randomize_order: boolean | null
+          start_hour: number | null
+          status: string | null
+          updated_at: string | null
+          use_emojis: boolean | null
+          user_id: string
+        }
+        Insert: {
+          auto_variations?: boolean | null
+          comments?: Json | null
+          consecutive_errors?: number | null
+          cooldown_reason?: string | null
+          cooldown_until?: string | null
+          created_at?: string | null
+          daily_count?: number | null
+          daily_limit?: number | null
+          end_hour?: number | null
+          id?: string
+          instagram_account_id: string
+          is_active?: boolean | null
+          last_comment_at?: string | null
+          max_delay_seconds?: number | null
+          min_delay_seconds?: number | null
+          randomize_order?: boolean | null
+          start_hour?: number | null
+          status?: string | null
+          updated_at?: string | null
+          use_emojis?: boolean | null
+          user_id: string
+        }
+        Update: {
+          auto_variations?: boolean | null
+          comments?: Json | null
+          consecutive_errors?: number | null
+          cooldown_reason?: string | null
+          cooldown_until?: string | null
+          created_at?: string | null
+          daily_count?: number | null
+          daily_limit?: number | null
+          end_hour?: number | null
+          id?: string
+          instagram_account_id?: string
+          is_active?: boolean | null
+          last_comment_at?: string | null
+          max_delay_seconds?: number | null
+          min_delay_seconds?: number | null
+          randomize_order?: boolean | null
+          start_hour?: number | null
+          status?: string | null
+          updated_at?: string | null
+          use_emojis?: boolean | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      instagram_engagement_limits: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_enabled: boolean | null
+          max_accounts: number | null
+          max_daily_comments: number | null
+          min_delay_seconds: number | null
+          plan_type: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          max_accounts?: number | null
+          max_daily_comments?: number | null
+          min_delay_seconds?: number | null
+          plan_type: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          max_accounts?: number | null
+          max_daily_comments?: number | null
+          min_delay_seconds?: number | null
+          plan_type?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      instagram_engagement_logs: {
+        Row: {
+          action: string
+          comment_text: string | null
+          config_id: string
+          created_at: string | null
+          error_message: string | null
+          execution_time_ms: number | null
+          id: string
+          instagram_account_id: string
+          ip_address: string | null
+          post_url: string | null
+          status: string
+          target_type: string | null
+          target_value: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          comment_text?: string | null
+          config_id: string
+          created_at?: string | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          id?: string
+          instagram_account_id: string
+          ip_address?: string | null
+          post_url?: string | null
+          status: string
+          target_type?: string | null
+          target_value?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          comment_text?: string | null
+          config_id?: string
+          created_at?: string | null
+          error_message?: string | null
+          execution_time_ms?: number | null
+          id?: string
+          instagram_account_id?: string
+          ip_address?: string | null
+          post_url?: string | null
+          status?: string
+          target_type?: string | null
+          target_value?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "instagram_engagement_logs_config_id_fkey"
+            columns: ["config_id"]
+            isOneToOne: false
+            referencedRelation: "instagram_engagement_configs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      instagram_engagement_targets: {
+        Row: {
+          config_id: string
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          priority: number | null
+          target_type: string
+          target_value: string
+        }
+        Insert: {
+          config_id: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          priority?: number | null
+          target_type: string
+          target_value: string
+        }
+        Update: {
+          config_id?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          priority?: number | null
+          target_type?: string
+          target_value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "instagram_engagement_targets_config_id_fkey"
+            columns: ["config_id"]
+            isOneToOne: false
+            referencedRelation: "instagram_engagement_configs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       integrations: {
         Row: {
           access_token: string
@@ -966,6 +1496,248 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      smart_link_buttons: {
+        Row: {
+          click_count: number | null
+          created_at: string | null
+          event_name: string | null
+          funnel_id: string | null
+          funnel_tag: string | null
+          icon: string | null
+          id: string
+          is_active: boolean | null
+          page_id: string
+          position: number | null
+          title: string
+          updated_at: string | null
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          click_count?: number | null
+          created_at?: string | null
+          event_name?: string | null
+          funnel_id?: string | null
+          funnel_tag?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          page_id: string
+          position?: number | null
+          title: string
+          updated_at?: string | null
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          click_count?: number | null
+          created_at?: string | null
+          event_name?: string | null
+          funnel_id?: string | null
+          funnel_tag?: string | null
+          icon?: string | null
+          id?: string
+          is_active?: boolean | null
+          page_id?: string
+          position?: number | null
+          title?: string
+          updated_at?: string | null
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "smart_link_buttons_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "smart_link_buttons_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "smart_link_pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      smart_link_clicks: {
+        Row: {
+          button_id: string
+          clicked_at: string | null
+          country: string | null
+          id: string
+          ip_address: string | null
+          page_id: string
+          referrer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          button_id: string
+          clicked_at?: string | null
+          country?: string | null
+          id?: string
+          ip_address?: string | null
+          page_id: string
+          referrer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          button_id?: string
+          clicked_at?: string | null
+          country?: string | null
+          id?: string
+          ip_address?: string | null
+          page_id?: string
+          referrer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "smart_link_clicks_button_id_fkey"
+            columns: ["button_id"]
+            isOneToOne: false
+            referencedRelation: "smart_link_buttons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "smart_link_clicks_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "smart_link_pages"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      smart_link_pages: {
+        Row: {
+          avatar_url: string | null
+          background_color: string | null
+          button_style: string | null
+          created_at: string | null
+          description: string | null
+          google_analytics_id: string | null
+          id: string
+          is_active: boolean | null
+          meta_pixel_id: string | null
+          page_type: string | null
+          redirect_url: string | null
+          slug: string
+          template: string | null
+          text_color: string | null
+          tiktok_pixel_id: string | null
+          title: string
+          total_views: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          background_color?: string | null
+          button_style?: string | null
+          created_at?: string | null
+          description?: string | null
+          google_analytics_id?: string | null
+          id?: string
+          is_active?: boolean | null
+          meta_pixel_id?: string | null
+          page_type?: string | null
+          redirect_url?: string | null
+          slug: string
+          template?: string | null
+          text_color?: string | null
+          tiktok_pixel_id?: string | null
+          title: string
+          total_views?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          background_color?: string | null
+          button_style?: string | null
+          created_at?: string | null
+          description?: string | null
+          google_analytics_id?: string | null
+          id?: string
+          is_active?: boolean | null
+          meta_pixel_id?: string | null
+          page_type?: string | null
+          redirect_url?: string | null
+          slug?: string
+          template?: string | null
+          text_color?: string | null
+          tiktok_pixel_id?: string | null
+          title?: string
+          total_views?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      smart_link_views: {
+        Row: {
+          id: string
+          page_id: string
+          referrer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          viewed_at: string | null
+        }
+        Insert: {
+          id?: string
+          page_id: string
+          referrer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          viewed_at?: string | null
+        }
+        Update: {
+          id?: string
+          page_id?: string
+          referrer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          viewed_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "smart_link_views_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "smart_link_pages"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subscriptions: {
         Row: {
