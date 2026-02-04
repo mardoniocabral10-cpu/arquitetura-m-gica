@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      account_manager_logs: {
+        Row: {
+          action: string
+          action_type: string
+          created_at: string | null
+          details: Json | null
+          id: string
+          ip_address: string | null
+          manager_id: string
+          target_user_id: string | null
+        }
+        Insert: {
+          action: string
+          action_type: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          manager_id: string
+          target_user_id?: string | null
+        }
+        Update: {
+          action?: string
+          action_type?: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          manager_id?: string
+          target_user_id?: string | null
+        }
+        Relationships: []
+      }
+      account_manager_sellers: {
+        Row: {
+          assigned_at: string | null
+          created_at: string | null
+          id: string
+          manager_id: string
+          notes: string | null
+          seller_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_at?: string | null
+          created_at?: string | null
+          id?: string
+          manager_id: string
+          notes?: string | null
+          seller_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_at?: string | null
+          created_at?: string | null
+          id?: string
+          manager_id?: string
+          notes?: string | null
+          seller_id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       admin_engagement_accounts: {
         Row: {
           consecutive_errors: number | null
@@ -156,6 +219,111 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: boolean | null
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value?: boolean | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: boolean | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      admin_settings_history: {
+        Row: {
+          changed_at: string | null
+          changed_by: string | null
+          id: string
+          new_value: boolean
+          old_value: boolean | null
+          setting_key: string
+        }
+        Insert: {
+          changed_at?: string | null
+          changed_by?: string | null
+          id?: string
+          new_value: boolean
+          old_value?: boolean | null
+          setting_key: string
+        }
+        Update: {
+          changed_at?: string | null
+          changed_by?: string | null
+          id?: string
+          new_value?: boolean
+          old_value?: boolean | null
+          setting_key?: string
+        }
+        Relationships: []
+      }
+      admin_text_settings: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          setting_key: string
+          setting_value: string | null
+          updated_at: string | null
+          updated_by: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          setting_key: string
+          setting_value?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          setting_key?: string
+          setting_value?: string | null
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      blocked_download_domains: {
+        Row: {
+          blocked_by: string | null
+          created_at: string | null
+          domain: string
+          id: string
+          reason: string | null
+        }
+        Insert: {
+          blocked_by?: string | null
+          created_at?: string | null
+          domain: string
+          id?: string
+          reason?: string | null
+        }
+        Update: {
+          blocked_by?: string | null
+          created_at?: string | null
+          domain?: string
+          id?: string
+          reason?: string | null
+        }
+        Relationships: []
+      }
       campaigns: {
         Row: {
           avg_send_time_ms: number | null
@@ -257,6 +425,78 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      catalog_purchases: {
+        Row: {
+          amount_cents: number
+          created_at: string | null
+          id: string
+          item_id: string
+          item_type: string
+          payment_id: string | null
+          status: string | null
+          transaction_id: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string | null
+          id?: string
+          item_id: string
+          item_type: string
+          payment_id?: string | null
+          status?: string | null
+          transaction_id?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string | null
+          id?: string
+          item_id?: string
+          item_type?: string
+          payment_id?: string | null
+          status?: string | null
+          transaction_id?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      checkout_sessions: {
+        Row: {
+          amount_cents: number
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          product_id: string | null
+          product_type: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          amount_cents: number
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          product_id?: string | null
+          product_type: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          amount_cents?: number
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          product_id?: string | null
+          product_type?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: []
       }
       cloaker_clicks: {
         Row: {
@@ -552,6 +792,168 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      content_downloads: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          file_name: string
+          file_size_bytes: number | null
+          file_type: string
+          id: string
+          metadata: Json | null
+          progress: number | null
+          source_id: string | null
+          source_type: string
+          source_url: string | null
+          status: string | null
+          storage_path: string | null
+          storage_provider: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          file_name: string
+          file_size_bytes?: number | null
+          file_type: string
+          id?: string
+          metadata?: Json | null
+          progress?: number | null
+          source_id?: string | null
+          source_type: string
+          source_url?: string | null
+          status?: string | null
+          storage_path?: string | null
+          storage_provider?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          file_name?: string
+          file_size_bytes?: number | null
+          file_type?: string
+          id?: string
+          metadata?: Json | null
+          progress?: number | null
+          source_id?: string | null
+          source_type?: string
+          source_url?: string | null
+          status?: string | null
+          storage_path?: string | null
+          storage_provider?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      content_sync_limits: {
+        Row: {
+          created_at: string | null
+          daily_downloads: number | null
+          id: string
+          max_file_size_mb: number | null
+          monthly_storage_mb: number | null
+          plan_name: string
+          telegram_sync_enabled: boolean | null
+          updated_at: string | null
+          url_download_enabled: boolean | null
+        }
+        Insert: {
+          created_at?: string | null
+          daily_downloads?: number | null
+          id?: string
+          max_file_size_mb?: number | null
+          monthly_storage_mb?: number | null
+          plan_name: string
+          telegram_sync_enabled?: boolean | null
+          updated_at?: string | null
+          url_download_enabled?: boolean | null
+        }
+        Update: {
+          created_at?: string | null
+          daily_downloads?: number | null
+          id?: string
+          max_file_size_mb?: number | null
+          monthly_storage_mb?: number | null
+          plan_name?: string
+          telegram_sync_enabled?: boolean | null
+          updated_at?: string | null
+          url_download_enabled?: boolean | null
+        }
+        Relationships: []
+      }
+      content_sync_logs: {
+        Row: {
+          action: string
+          created_at: string | null
+          details: Json | null
+          id: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      content_sync_settings: {
+        Row: {
+          auto_organize_by_date: boolean | null
+          auto_organize_by_group: boolean | null
+          auto_organize_by_type: boolean | null
+          created_at: string | null
+          default_storage_provider: string | null
+          id: string
+          r2_config: Json | null
+          s3_config: Json | null
+          updated_at: string | null
+          user_id: string
+          wasabi_config: Json | null
+        }
+        Insert: {
+          auto_organize_by_date?: boolean | null
+          auto_organize_by_group?: boolean | null
+          auto_organize_by_type?: boolean | null
+          created_at?: string | null
+          default_storage_provider?: string | null
+          id?: string
+          r2_config?: Json | null
+          s3_config?: Json | null
+          updated_at?: string | null
+          user_id: string
+          wasabi_config?: Json | null
+        }
+        Update: {
+          auto_organize_by_date?: boolean | null
+          auto_organize_by_group?: boolean | null
+          auto_organize_by_type?: boolean | null
+          created_at?: string | null
+          default_storage_provider?: string | null
+          id?: string
+          r2_config?: Json | null
+          s3_config?: Json | null
+          updated_at?: string | null
+          user_id?: string
+          wasabi_config?: Json | null
+        }
+        Relationships: []
       }
       dashboard_banners: {
         Row: {
@@ -1577,6 +1979,69 @@ export type Database = {
         }
         Relationships: []
       }
+      models_for_sale: {
+        Row: {
+          assets: Json | null
+          bio: string | null
+          category: string | null
+          created_at: string | null
+          created_by: string | null
+          deliverable_info: string | null
+          deliverable_link: string | null
+          deliverable_notes: string | null
+          funnel_json: Json | null
+          id: string
+          image_url: string | null
+          is_sold: boolean | null
+          name: string
+          niche: string | null
+          price_cents: number
+          scripts: Json | null
+          sold_at: string | null
+          sold_to_user_id: string | null
+        }
+        Insert: {
+          assets?: Json | null
+          bio?: string | null
+          category?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_info?: string | null
+          deliverable_link?: string | null
+          deliverable_notes?: string | null
+          funnel_json?: Json | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          name: string
+          niche?: string | null
+          price_cents: number
+          scripts?: Json | null
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+        }
+        Update: {
+          assets?: Json | null
+          bio?: string | null
+          category?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_info?: string | null
+          deliverable_link?: string | null
+          deliverable_notes?: string | null
+          funnel_json?: Json | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          name?: string
+          niche?: string | null
+          price_cents?: number
+          scripts?: Json | null
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+        }
+        Relationships: []
+      }
       multilogin_facebook_accounts: {
         Row: {
           access_token: string
@@ -2033,6 +2498,86 @@ export type Database = {
         }
         Relationships: []
       }
+      pixel_warming_configs: {
+        Row: {
+          access_token: string | null
+          created_at: string | null
+          events_sent: number | null
+          id: string
+          is_active: boolean | null
+          last_warmed_at: string | null
+          pixel_id: string
+          platform: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_token?: string | null
+          created_at?: string | null
+          events_sent?: number | null
+          id?: string
+          is_active?: boolean | null
+          last_warmed_at?: string | null
+          pixel_id: string
+          platform: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_token?: string | null
+          created_at?: string | null
+          events_sent?: number | null
+          id?: string
+          is_active?: boolean | null
+          last_warmed_at?: string | null
+          pixel_id?: string
+          platform?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      pixel_warming_logs: {
+        Row: {
+          config_id: string
+          created_at: string | null
+          error_message: string | null
+          event_data: Json | null
+          event_type: string
+          id: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          config_id: string
+          created_at?: string | null
+          error_message?: string | null
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          config_id?: string
+          created_at?: string | null
+          error_message?: string | null
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pixel_warming_logs_config_id_fkey"
+            columns: ["config_id"]
+            isOneToOne: false
+            referencedRelation: "pixel_warming_configs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       plans: {
         Row: {
           created_at: string | null
@@ -2081,6 +2626,53 @@ export type Database = {
         }
         Relationships: []
       }
+      post_platform_logs: {
+        Row: {
+          created_at: string | null
+          error_message: string | null
+          id: string
+          platform: string
+          platform_post_id: string | null
+          post_id: string
+          posted_at: string | null
+          retry_count: number | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          platform: string
+          platform_post_id?: string | null
+          post_id: string
+          posted_at?: string | null
+          retry_count?: number | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          platform?: string
+          platform_post_id?: string | null
+          post_id?: string
+          posted_at?: string | null
+          retry_count?: number | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_platform_logs_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "scheduled_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -2126,6 +2718,84 @@ export type Database = {
           phone?: string | null
           updated_at?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      referral_allowed_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role_name: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role_name: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role_name?: string
+        }
+        Relationships: []
+      }
+      referral_audit_logs: {
+        Row: {
+          action: string
+          created_at: string | null
+          entity_id: string | null
+          entity_type: string
+          id: string
+          ip_address: string | null
+          new_data: Json | null
+          old_data: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          ip_address?: string | null
+          new_data?: Json | null
+          old_data?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          ip_address?: string | null
+          new_data?: Json | null
+          old_data?: Json | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      referral_role_commissions: {
+        Row: {
+          commission_percent: number
+          created_at: string | null
+          id: string
+          role_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          commission_percent: number
+          created_at?: string | null
+          id?: string
+          role_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          commission_percent?: number
+          created_at?: string | null
+          id?: string
+          role_name?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -2192,6 +2862,42 @@ export type Database = {
           referrer_id?: string
           status?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      scheduled_posts: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          media_urls: Json | null
+          platforms: string[]
+          scheduled_at: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          media_urls?: Json | null
+          platforms: string[]
+          scheduled_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          media_urls?: Json | null
+          platforms?: string[]
+          scheduled_at?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -2437,6 +3143,57 @@ export type Database = {
           },
         ]
       }
+      social_accounts: {
+        Row: {
+          access_token: string | null
+          account_avatar_url: string | null
+          account_name: string | null
+          account_username: string | null
+          created_at: string | null
+          id: string
+          is_connected: boolean | null
+          last_used_at: string | null
+          platform: string
+          platform_user_id: string | null
+          refresh_token: string | null
+          token_expires_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_token?: string | null
+          account_avatar_url?: string | null
+          account_name?: string | null
+          account_username?: string | null
+          created_at?: string | null
+          id?: string
+          is_connected?: boolean | null
+          last_used_at?: string | null
+          platform: string
+          platform_user_id?: string | null
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_token?: string | null
+          account_avatar_url?: string | null
+          account_name?: string | null
+          account_username?: string | null
+          created_at?: string | null
+          id?: string
+          is_connected?: boolean | null
+          last_used_at?: string | null
+          platform?: string
+          platform_user_id?: string | null
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           created_at: string | null
@@ -2477,6 +3234,69 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      telegram_groups: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          deliverable_info: string | null
+          deliverable_invite_link: string | null
+          deliverable_notes: string | null
+          description: string | null
+          group_name: string
+          group_type: string | null
+          group_username: string | null
+          id: string
+          image_url: string | null
+          is_sold: boolean | null
+          is_verified: boolean | null
+          members_count: number | null
+          niche: string | null
+          price_cents: number
+          sold_at: string | null
+          sold_to_user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_info?: string | null
+          deliverable_invite_link?: string | null
+          deliverable_notes?: string | null
+          description?: string | null
+          group_name: string
+          group_type?: string | null
+          group_username?: string | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          is_verified?: boolean | null
+          members_count?: number | null
+          niche?: string | null
+          price_cents: number
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_info?: string | null
+          deliverable_invite_link?: string | null
+          deliverable_notes?: string | null
+          description?: string | null
+          group_name?: string
+          group_type?: string | null
+          group_username?: string | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          is_verified?: boolean | null
+          members_count?: number | null
+          niche?: string | null
+          price_cents?: number
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+        }
+        Relationships: []
       }
       telegram_integrations: {
         Row: {
@@ -2568,6 +3388,39 @@ export type Database = {
           },
         ]
       }
+      telegram_mtproto_accounts: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_connected: boolean | null
+          last_connected_at: string | null
+          phone_number: string
+          session_data: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_connected?: boolean | null
+          last_connected_at?: string | null
+          phone_number: string
+          session_data?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_connected?: boolean | null
+          last_connected_at?: string | null
+          phone_number?: string
+          session_data?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       telegram_sessions: {
         Row: {
           chat_id: string
@@ -2639,6 +3492,134 @@ export type Database = {
           },
         ]
       }
+      telegram_sync_sources: {
+        Row: {
+          account_id: string
+          created_at: string | null
+          date_from: string | null
+          date_to: string | null
+          id: string
+          is_active: boolean | null
+          keywords: string[] | null
+          max_file_size_mb: number | null
+          media_types: string[] | null
+          source_id: string
+          source_name: string
+          source_type: string
+          sync_mode: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          account_id: string
+          created_at?: string | null
+          date_from?: string | null
+          date_to?: string | null
+          id?: string
+          is_active?: boolean | null
+          keywords?: string[] | null
+          max_file_size_mb?: number | null
+          media_types?: string[] | null
+          source_id: string
+          source_name: string
+          source_type: string
+          sync_mode?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          account_id?: string
+          created_at?: string | null
+          date_from?: string | null
+          date_to?: string | null
+          id?: string
+          is_active?: boolean | null
+          keywords?: string[] | null
+          max_file_size_mb?: number | null
+          media_types?: string[] | null
+          source_id?: string
+          source_name?: string
+          source_type?: string
+          sync_mode?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "telegram_sync_sources_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "telegram_mtproto_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      tiktok_accounts: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          deliverable_email: string | null
+          deliverable_info: string | null
+          deliverable_login: string | null
+          deliverable_notes: string | null
+          deliverable_password: string | null
+          description: string | null
+          followers: number | null
+          id: string
+          image_url: string | null
+          is_sold: boolean | null
+          is_verified: boolean | null
+          likes: number | null
+          niche: string | null
+          price_cents: number
+          sold_at: string | null
+          sold_to_user_id: string | null
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_email?: string | null
+          deliverable_info?: string | null
+          deliverable_login?: string | null
+          deliverable_notes?: string | null
+          deliverable_password?: string | null
+          description?: string | null
+          followers?: number | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          is_verified?: boolean | null
+          likes?: number | null
+          niche?: string | null
+          price_cents: number
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          deliverable_email?: string | null
+          deliverable_info?: string | null
+          deliverable_login?: string | null
+          deliverable_notes?: string | null
+          deliverable_password?: string | null
+          description?: string | null
+          followers?: number | null
+          id?: string
+          image_url?: string | null
+          is_sold?: boolean | null
+          is_verified?: boolean | null
+          likes?: number | null
+          niche?: string | null
+          price_cents?: number
+          sold_at?: string | null
+          sold_to_user_id?: string | null
+          username?: string
+        }
+        Relationships: []
+      }
       transactions: {
         Row: {
           amount_cents: number
@@ -2705,6 +3686,93 @@ export type Database = {
         }
         Relationships: []
       }
+      user_activity: {
+        Row: {
+          action: string
+          created_at: string | null
+          details: Json | null
+          id: string
+          ip_address: string | null
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string | null
+          details?: Json | null
+          id?: string
+          ip_address?: string | null
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_events: {
+        Row: {
+          created_at: string | null
+          event_data: Json | null
+          event_type: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_metrics: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_activity_at: string | null
+          media_sent: number | null
+          telegram_integrations_active: number | null
+          total_actions: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_activity_at?: string | null
+          media_sent?: number | null
+          telegram_integrations_active?: number | null
+          total_actions?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_activity_at?: string | null
+          media_sent?: number | null
+          telegram_integrations_active?: number | null
+          total_actions?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_notification_reads: {
         Row: {
           id: string
@@ -2734,6 +3802,36 @@ export type Database = {
           },
         ]
       }
+      user_referral_commissions: {
+        Row: {
+          commission_percent: number | null
+          created_at: string | null
+          created_by: string | null
+          id: string
+          notes: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          commission_percent?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          notes?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          commission_percent?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          notes?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -2752,6 +3850,156 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"] | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      utm_events: {
+        Row: {
+          browser: string | null
+          country: string | null
+          created_at: string | null
+          device_type: string | null
+          event_data: Json | null
+          event_type: string | null
+          event_value: number | null
+          fbclid: string | null
+          gclid: string | null
+          id: string
+          ip_address: string | null
+          os: string | null
+          page_url: string | null
+          pixel_id: string
+          referrer: string | null
+          session_id: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          browser?: string | null
+          country?: string | null
+          created_at?: string | null
+          device_type?: string | null
+          event_data?: Json | null
+          event_type?: string | null
+          event_value?: number | null
+          fbclid?: string | null
+          gclid?: string | null
+          id?: string
+          ip_address?: string | null
+          os?: string | null
+          page_url?: string | null
+          pixel_id: string
+          referrer?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          browser?: string | null
+          country?: string | null
+          created_at?: string | null
+          device_type?: string | null
+          event_data?: Json | null
+          event_type?: string | null
+          event_value?: number | null
+          fbclid?: string | null
+          gclid?: string | null
+          id?: string
+          ip_address?: string | null
+          os?: string | null
+          page_url?: string | null
+          pixel_id?: string
+          referrer?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      utm_pixels: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          pixel_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          pixel_id: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          pixel_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vendor_sales: {
+        Row: {
+          buyer_id: string
+          created_at: string | null
+          id: string
+          item_id: string
+          item_type: string
+          paid_at: string | null
+          platform_fee_cents: number
+          sale_amount_cents: number
+          status: string | null
+          transaction_id: string | null
+          updated_at: string | null
+          vendor_commission_cents: number
+          vendor_id: string
+        }
+        Insert: {
+          buyer_id: string
+          created_at?: string | null
+          id?: string
+          item_id: string
+          item_type: string
+          paid_at?: string | null
+          platform_fee_cents: number
+          sale_amount_cents: number
+          status?: string | null
+          transaction_id?: string | null
+          updated_at?: string | null
+          vendor_commission_cents: number
+          vendor_id: string
+        }
+        Update: {
+          buyer_id?: string
+          created_at?: string | null
+          id?: string
+          item_id?: string
+          item_type?: string
+          paid_at?: string | null
+          platform_fee_cents?: number
+          sale_amount_cents?: number
+          status?: string | null
+          transaction_id?: string | null
+          updated_at?: string | null
+          vendor_commission_cents?: number
+          vendor_id?: string
         }
         Relationships: []
       }
@@ -3099,7 +4347,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_access_referrals: { Args: { p_user_id: string }; Returns: boolean }
+      generate_referral_code: { Args: { p_user_id: string }; Returns: string }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       app_role:
