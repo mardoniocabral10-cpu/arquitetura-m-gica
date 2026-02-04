@@ -14,6 +14,109 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_engagement_accounts: {
+        Row: {
+          consecutive_errors: number | null
+          context_id: string | null
+          cooldown_reason: string | null
+          cooldown_until: string | null
+          created_at: string | null
+          created_by: string | null
+          daily_comment_count: number | null
+          error_message: string | null
+          id: string
+          instagram_id: string | null
+          is_available: boolean | null
+          last_login_at: string | null
+          last_used_at: string | null
+          last_used_by: string | null
+          login_status: string | null
+          notes: string | null
+          password: string | null
+          password_encrypted: string | null
+          proxy_id: string | null
+          session_data: Json | null
+          status: string | null
+          total_comment_count: number | null
+          updated_at: string | null
+          username: string
+        }
+        Insert: {
+          consecutive_errors?: number | null
+          context_id?: string | null
+          cooldown_reason?: string | null
+          cooldown_until?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          daily_comment_count?: number | null
+          error_message?: string | null
+          id?: string
+          instagram_id?: string | null
+          is_available?: boolean | null
+          last_login_at?: string | null
+          last_used_at?: string | null
+          last_used_by?: string | null
+          login_status?: string | null
+          notes?: string | null
+          password?: string | null
+          password_encrypted?: string | null
+          proxy_id?: string | null
+          session_data?: Json | null
+          status?: string | null
+          total_comment_count?: number | null
+          updated_at?: string | null
+          username: string
+        }
+        Update: {
+          consecutive_errors?: number | null
+          context_id?: string | null
+          cooldown_reason?: string | null
+          cooldown_until?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          daily_comment_count?: number | null
+          error_message?: string | null
+          id?: string
+          instagram_id?: string | null
+          is_available?: boolean | null
+          last_login_at?: string | null
+          last_used_at?: string | null
+          last_used_by?: string | null
+          login_status?: string | null
+          notes?: string | null
+          password?: string | null
+          password_encrypted?: string | null
+          proxy_id?: string | null
+          session_data?: Json | null
+          status?: string | null
+          total_comment_count?: number | null
+          updated_at?: string | null
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_engagement_accounts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "admin_engagement_accounts_last_used_by_fkey"
+            columns: ["last_used_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "admin_engagement_accounts_proxy_id_fkey"
+            columns: ["proxy_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_proxies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       admin_media: {
         Row: {
           created_at: string | null
@@ -384,6 +487,72 @@ export type Database = {
           },
         ]
       }
+      commissions: {
+        Row: {
+          amount_cents: number
+          commission_cents: number
+          commission_percent: number
+          created_at: string | null
+          id: string
+          notes: string | null
+          paid_at: string | null
+          paid_by: string | null
+          referral_id: string
+          referred_id: string
+          referrer_id: string
+          status: string | null
+          transaction_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount_cents: number
+          commission_cents: number
+          commission_percent: number
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          paid_by?: string | null
+          referral_id: string
+          referred_id: string
+          referrer_id: string
+          status?: string | null
+          transaction_id?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount_cents?: number
+          commission_cents?: number
+          commission_percent?: number
+          created_at?: string | null
+          id?: string
+          notes?: string | null
+          paid_at?: string | null
+          paid_by?: string | null
+          referral_id?: string
+          referred_id?: string
+          referrer_id?: string
+          status?: string | null
+          transaction_id?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "commissions_referral_id_fkey"
+            columns: ["referral_id"]
+            isOneToOne: false
+            referencedRelation: "referrals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "commissions_transaction_id_fkey"
+            columns: ["transaction_id"]
+            isOneToOne: false
+            referencedRelation: "transactions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dashboard_banners: {
         Row: {
           created_at: string | null
@@ -523,6 +692,64 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "telegram_integrations"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      engagement_account_usage: {
+        Row: {
+          account_id: string
+          comment_text: string | null
+          config_id: string | null
+          created_at: string | null
+          error_message: string | null
+          id: string
+          status: string | null
+          target_url: string | null
+          user_id: string
+        }
+        Insert: {
+          account_id: string
+          comment_text?: string | null
+          config_id?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          status?: string | null
+          target_url?: string | null
+          user_id: string
+        }
+        Update: {
+          account_id?: string
+          comment_text?: string | null
+          config_id?: string | null
+          created_at?: string | null
+          error_message?: string | null
+          id?: string
+          status?: string | null
+          target_url?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "engagement_account_usage_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "admin_engagement_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "engagement_account_usage_config_id_fkey"
+            columns: ["config_id"]
+            isOneToOne: false
+            referencedRelation: "instagram_engagement_configs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "engagement_account_usage_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
           },
         ]
       }
@@ -1350,6 +1577,411 @@ export type Database = {
         }
         Relationships: []
       }
+      multilogin_facebook_accounts: {
+        Row: {
+          access_token: string
+          avatar_url: string | null
+          business_manager_id: string | null
+          business_manager_name: string | null
+          context_id: string | null
+          created_at: string | null
+          display_name: string | null
+          email: string | null
+          error_message: string | null
+          facebook_user_id: string
+          id: string
+          last_used_at: string | null
+          permissions: string[] | null
+          proxy_id: string | null
+          status: string | null
+          token_expires_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          avatar_url?: string | null
+          business_manager_id?: string | null
+          business_manager_name?: string | null
+          context_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          error_message?: string | null
+          facebook_user_id: string
+          id?: string
+          last_used_at?: string | null
+          permissions?: string[] | null
+          proxy_id?: string | null
+          status?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          avatar_url?: string | null
+          business_manager_id?: string | null
+          business_manager_name?: string | null
+          context_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          error_message?: string | null
+          facebook_user_id?: string
+          id?: string
+          last_used_at?: string | null
+          permissions?: string[] | null
+          proxy_id?: string | null
+          status?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "multilogin_facebook_accounts_proxy_id_fkey"
+            columns: ["proxy_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_proxies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      multilogin_google_accounts: {
+        Row: {
+          access_token: string
+          avatar_url: string | null
+          context_id: string | null
+          created_at: string | null
+          display_name: string | null
+          email: string
+          error_message: string | null
+          id: string
+          last_used_at: string | null
+          proxy_id: string | null
+          refresh_token: string | null
+          scopes: string[] | null
+          status: string | null
+          token_expires_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          access_token: string
+          avatar_url?: string | null
+          context_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email: string
+          error_message?: string | null
+          id?: string
+          last_used_at?: string | null
+          proxy_id?: string | null
+          refresh_token?: string | null
+          scopes?: string[] | null
+          status?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          access_token?: string
+          avatar_url?: string | null
+          context_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email?: string
+          error_message?: string | null
+          id?: string
+          last_used_at?: string | null
+          proxy_id?: string | null
+          refresh_token?: string | null
+          scopes?: string[] | null
+          status?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "multilogin_google_accounts_proxy_id_fkey"
+            columns: ["proxy_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_proxies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      multilogin_instagram_accounts: {
+        Row: {
+          access_token: string | null
+          avatar_url: string | null
+          context_id: string | null
+          created_at: string | null
+          display_name: string | null
+          error_message: string | null
+          facebook_account_id: string | null
+          id: string
+          instagram_id: string
+          last_used_at: string | null
+          page_id: string | null
+          page_name: string | null
+          proxy_id: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+          username: string
+        }
+        Insert: {
+          access_token?: string | null
+          avatar_url?: string | null
+          context_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          error_message?: string | null
+          facebook_account_id?: string | null
+          id?: string
+          instagram_id: string
+          last_used_at?: string | null
+          page_id?: string | null
+          page_name?: string | null
+          proxy_id?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+          username: string
+        }
+        Update: {
+          access_token?: string | null
+          avatar_url?: string | null
+          context_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          error_message?: string | null
+          facebook_account_id?: string | null
+          id?: string
+          instagram_id?: string
+          last_used_at?: string | null
+          page_id?: string | null
+          page_name?: string | null
+          proxy_id?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "multilogin_instagram_accounts_facebook_account_id_fkey"
+            columns: ["facebook_account_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_facebook_accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "multilogin_instagram_accounts_proxy_id_fkey"
+            columns: ["proxy_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_proxies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      multilogin_logs: {
+        Row: {
+          account_id: string | null
+          account_type: string | null
+          action: string
+          country: string | null
+          created_at: string | null
+          details: Json | null
+          event_type: string
+          id: string
+          ip_used: string | null
+          message: string | null
+          proxy_id: string | null
+          status: string | null
+          user_id: string
+          worker_id: string | null
+        }
+        Insert: {
+          account_id?: string | null
+          account_type?: string | null
+          action: string
+          country?: string | null
+          created_at?: string | null
+          details?: Json | null
+          event_type: string
+          id?: string
+          ip_used?: string | null
+          message?: string | null
+          proxy_id?: string | null
+          status?: string | null
+          user_id: string
+          worker_id?: string | null
+        }
+        Update: {
+          account_id?: string | null
+          account_type?: string | null
+          action?: string
+          country?: string | null
+          created_at?: string | null
+          details?: Json | null
+          event_type?: string
+          id?: string
+          ip_used?: string | null
+          message?: string | null
+          proxy_id?: string | null
+          status?: string | null
+          user_id?: string
+          worker_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "multilogin_logs_proxy_id_fkey"
+            columns: ["proxy_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_proxies"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "multilogin_logs_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_workers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      multilogin_proxies: {
+        Row: {
+          country: string | null
+          created_at: string | null
+          detected_ip: string | null
+          host: string
+          id: string
+          is_active: boolean | null
+          last_test_success: boolean | null
+          last_tested_at: string | null
+          name: string
+          password: string | null
+          port: number
+          protocol: string
+          test_error: string | null
+          updated_at: string | null
+          user_id: string
+          username: string | null
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string | null
+          detected_ip?: string | null
+          host: string
+          id?: string
+          is_active?: boolean | null
+          last_test_success?: boolean | null
+          last_tested_at?: string | null
+          name: string
+          password?: string | null
+          port: number
+          protocol: string
+          test_error?: string | null
+          updated_at?: string | null
+          user_id: string
+          username?: string | null
+        }
+        Update: {
+          country?: string | null
+          created_at?: string | null
+          detected_ip?: string | null
+          host?: string
+          id?: string
+          is_active?: boolean | null
+          last_test_success?: boolean | null
+          last_tested_at?: string | null
+          name?: string
+          password?: string | null
+          port?: number
+          protocol?: string
+          test_error?: string | null
+          updated_at?: string | null
+          user_id?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      multilogin_workers: {
+        Row: {
+          account_id: string
+          account_type: string
+          config: Json | null
+          created_at: string | null
+          error_count: number | null
+          id: string
+          is_active: boolean | null
+          last_error: string | null
+          last_run_at: string | null
+          name: string
+          next_run_at: string | null
+          proxy_id: string | null
+          run_count: number | null
+          schedule_cron: string | null
+          status: string | null
+          task_type: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          account_id: string
+          account_type: string
+          config?: Json | null
+          created_at?: string | null
+          error_count?: number | null
+          id?: string
+          is_active?: boolean | null
+          last_error?: string | null
+          last_run_at?: string | null
+          name: string
+          next_run_at?: string | null
+          proxy_id?: string | null
+          run_count?: number | null
+          schedule_cron?: string | null
+          status?: string | null
+          task_type: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          account_id?: string
+          account_type?: string
+          config?: Json | null
+          created_at?: string | null
+          error_count?: number | null
+          id?: string
+          is_active?: boolean | null
+          last_error?: string | null
+          last_run_at?: string | null
+          name?: string
+          next_run_at?: string | null
+          proxy_id?: string | null
+          run_count?: number | null
+          schedule_cron?: string | null
+          status?: string | null
+          task_type?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "multilogin_workers_proxy_id_fkey"
+            columns: ["proxy_id"]
+            isOneToOne: false
+            referencedRelation: "multilogin_proxies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notifications: {
         Row: {
           created_at: string | null
@@ -1494,6 +2126,72 @@ export type Database = {
           phone?: string | null
           updated_at?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      referral_settings: {
+        Row: {
+          commission_type: string | null
+          cookie_duration_days: number | null
+          created_at: string | null
+          default_commission_percent: number | null
+          id: string
+          is_enabled: boolean | null
+          min_payout_cents: number | null
+          referral_base_url: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          commission_type?: string | null
+          cookie_duration_days?: number | null
+          created_at?: string | null
+          default_commission_percent?: number | null
+          id?: string
+          is_enabled?: boolean | null
+          min_payout_cents?: number | null
+          referral_base_url?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          commission_type?: string | null
+          cookie_duration_days?: number | null
+          created_at?: string | null
+          default_commission_percent?: number | null
+          id?: string
+          is_enabled?: boolean | null
+          min_payout_cents?: number | null
+          referral_base_url?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          created_at: string | null
+          id: string
+          referral_code: string
+          referred_id: string
+          referrer_id: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          referral_code: string
+          referred_id: string
+          referrer_id: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          referral_code?: string
+          referred_id?: string
+          referrer_id?: string
+          status?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -2056,6 +2754,345 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      wpp_accounts: {
+        Row: {
+          access_token: string
+          business_name: string | null
+          created_at: string | null
+          id: string
+          is_connected: boolean | null
+          last_validated_at: string | null
+          phone_display: string | null
+          phone_number_id: string
+          status: string | null
+          updated_at: string | null
+          user_id: string
+          waba_id: string
+          webhook_verify_token: string | null
+        }
+        Insert: {
+          access_token: string
+          business_name?: string | null
+          created_at?: string | null
+          id?: string
+          is_connected?: boolean | null
+          last_validated_at?: string | null
+          phone_display?: string | null
+          phone_number_id: string
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+          waba_id: string
+          webhook_verify_token?: string | null
+        }
+        Update: {
+          access_token?: string
+          business_name?: string | null
+          created_at?: string | null
+          id?: string
+          is_connected?: boolean | null
+          last_validated_at?: string | null
+          phone_display?: string | null
+          phone_number_id?: string
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+          waba_id?: string
+          webhook_verify_token?: string | null
+        }
+        Relationships: []
+      }
+      wpp_contacts: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_seen_at: string | null
+          name: string | null
+          opt_in_status: string | null
+          phone: string
+          profile_name: string | null
+          updated_at: string | null
+          user_id: string
+          wa_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_seen_at?: string | null
+          name?: string | null
+          opt_in_status?: string | null
+          phone: string
+          profile_name?: string | null
+          updated_at?: string | null
+          user_id: string
+          wa_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_seen_at?: string | null
+          name?: string | null
+          opt_in_status?: string | null
+          phone?: string
+          profile_name?: string | null
+          updated_at?: string | null
+          user_id?: string
+          wa_id?: string
+        }
+        Relationships: []
+      }
+      wpp_conversations: {
+        Row: {
+          conversation_id: string | null
+          created_at: string | null
+          id: string
+          last_message_at: string | null
+          pricing_category: string | null
+          updated_at: string | null
+          user_id: string
+          wa_id: string
+          window_open_until: string | null
+          wpp_account_id: string | null
+        }
+        Insert: {
+          conversation_id?: string | null
+          created_at?: string | null
+          id?: string
+          last_message_at?: string | null
+          pricing_category?: string | null
+          updated_at?: string | null
+          user_id: string
+          wa_id: string
+          window_open_until?: string | null
+          wpp_account_id?: string | null
+        }
+        Update: {
+          conversation_id?: string | null
+          created_at?: string | null
+          id?: string
+          last_message_at?: string | null
+          pricing_category?: string | null
+          updated_at?: string | null
+          user_id?: string
+          wa_id?: string
+          window_open_until?: string | null
+          wpp_account_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wpp_conversations_wpp_account_id_fkey"
+            columns: ["wpp_account_id"]
+            isOneToOne: false
+            referencedRelation: "wpp_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wpp_logs: {
+        Row: {
+          created_at: string | null
+          event_type: string
+          funnel_id: string | null
+          id: string
+          node_id: string | null
+          payload: Json | null
+          session_id: string | null
+          user_id: string
+          wpp_account_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_type: string
+          funnel_id?: string | null
+          id?: string
+          node_id?: string | null
+          payload?: Json | null
+          session_id?: string | null
+          user_id: string
+          wpp_account_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_type?: string
+          funnel_id?: string | null
+          id?: string
+          node_id?: string | null
+          payload?: Json | null
+          session_id?: string | null
+          user_id?: string
+          wpp_account_id?: string | null
+        }
+        Relationships: []
+      }
+      wpp_messages: {
+        Row: {
+          created_at: string | null
+          direction: string | null
+          error_message: string | null
+          id: string
+          message_id: string | null
+          message_type: string | null
+          payload: Json | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+          wa_id: string
+          wpp_account_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          direction?: string | null
+          error_message?: string | null
+          id?: string
+          message_id?: string | null
+          message_type?: string | null
+          payload?: Json | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+          wa_id: string
+          wpp_account_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          direction?: string | null
+          error_message?: string | null
+          id?: string
+          message_id?: string | null
+          message_type?: string | null
+          payload?: Json | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+          wa_id?: string
+          wpp_account_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wpp_messages_wpp_account_id_fkey"
+            columns: ["wpp_account_id"]
+            isOneToOne: false
+            referencedRelation: "wpp_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wpp_sessions: {
+        Row: {
+          chat_id: string
+          created_at: string | null
+          current_node_id: string | null
+          funnel_id: string | null
+          history: Json | null
+          id: string
+          is_finished: boolean | null
+          last_message_at: string | null
+          updated_at: string | null
+          user_id: string
+          variables: Json | null
+          wa_id: string
+          wpp_account_id: string | null
+        }
+        Insert: {
+          chat_id: string
+          created_at?: string | null
+          current_node_id?: string | null
+          funnel_id?: string | null
+          history?: Json | null
+          id?: string
+          is_finished?: boolean | null
+          last_message_at?: string | null
+          updated_at?: string | null
+          user_id: string
+          variables?: Json | null
+          wa_id: string
+          wpp_account_id?: string | null
+        }
+        Update: {
+          chat_id?: string
+          created_at?: string | null
+          current_node_id?: string | null
+          funnel_id?: string | null
+          history?: Json | null
+          id?: string
+          is_finished?: boolean | null
+          last_message_at?: string | null
+          updated_at?: string | null
+          user_id?: string
+          variables?: Json | null
+          wa_id?: string
+          wpp_account_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wpp_sessions_funnel_id_fkey"
+            columns: ["funnel_id"]
+            isOneToOne: false
+            referencedRelation: "funnels"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "wpp_sessions_wpp_account_id_fkey"
+            columns: ["wpp_account_id"]
+            isOneToOne: false
+            referencedRelation: "wpp_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      wpp_templates: {
+        Row: {
+          category: string | null
+          components: Json | null
+          created_at: string | null
+          id: string
+          language: string | null
+          status: string | null
+          template_id: string | null
+          template_name: string
+          updated_at: string | null
+          user_id: string
+          variables: Json | null
+          wpp_account_id: string | null
+        }
+        Insert: {
+          category?: string | null
+          components?: Json | null
+          created_at?: string | null
+          id?: string
+          language?: string | null
+          status?: string | null
+          template_id?: string | null
+          template_name: string
+          updated_at?: string | null
+          user_id: string
+          variables?: Json | null
+          wpp_account_id?: string | null
+        }
+        Update: {
+          category?: string | null
+          components?: Json | null
+          created_at?: string | null
+          id?: string
+          language?: string | null
+          status?: string | null
+          template_id?: string | null
+          template_name?: string
+          updated_at?: string | null
+          user_id?: string
+          variables?: Json | null
+          wpp_account_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wpp_templates_wpp_account_id_fkey"
+            columns: ["wpp_account_id"]
+            isOneToOne: false
+            referencedRelation: "wpp_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
