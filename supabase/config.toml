@@ -1,5 +1,8 @@
 project_id = "zapotlsfkamhofwizomn"
 
+[functions.generate-er-schema]
+verify_jwt = false
+
 [functions.telegram-bot]
 verify_jwt = true
 
