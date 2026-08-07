@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import SchemaGenerator from "./pages/SchemaGenerator";
+import MercadoPago from "./pages/MercadoPago";
 
 const queryClient = new QueryClient();
 
