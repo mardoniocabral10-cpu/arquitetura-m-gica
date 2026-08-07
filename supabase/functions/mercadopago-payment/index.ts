@@ -30,6 +30,8 @@ Deno.serve(async (req) => {
 
     const errors: string[] = []
     if (!accessToken) errors.push('Access Token do Mercado Pago é obrigatório')
+    else if (!/^(APP_USR|TEST)-[\w-]{10,}/.test(accessToken))
+      errors.push('Access Token inválido: deve começar com "APP_USR-" (produção) ou "TEST-" (teste)')
     if (!Number.isFinite(amount) || amount < 0.5) errors.push('Valor deve ser no mínimo R$ 0,50')
     if (description.length < 1 || description.length > 255) errors.push('Descrição inválida')
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) errors.push('E-mail do pagador inválido')
@@ -62,10 +64,11 @@ Deno.serve(async (req) => {
     const data = await res.json()
     if (!res.ok) {
       console.error('Mercado Pago error', res.status, data)
-      return json(
-        { error: data?.message || 'Falha ao criar cobrança no Mercado Pago', details: data },
-        res.status,
-      )
+      const message =
+        res.status === 401 || res.status === 403
+          ? 'Access Token recusado pelo Mercado Pago. Copie novamente o token em Suas integrações > Credenciais.'
+          : data?.message || 'Falha ao criar cobrança no Mercado Pago'
+      return json({ error: message, details: data }, 400)
     }
 
     const tx = data?.point_of_interaction?.transaction_data ?? {}

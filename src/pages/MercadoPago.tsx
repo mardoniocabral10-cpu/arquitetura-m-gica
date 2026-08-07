@@ -41,6 +41,10 @@ const MercadoPago = () => {
       toast.error("Informe o Access Token do Mercado Pago");
       return;
     }
+    if (!/^(APP_USR|TEST)-[\w-]{10,}/.test(accessToken.trim())) {
+      toast.error('Access Token inválido: deve começar com "APP_USR-" ou "TEST-"');
+      return;
+    }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) {
       toast.error("Informe um e-mail válido do pagador");
       return;
