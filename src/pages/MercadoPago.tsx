@@ -68,7 +68,15 @@ const MercadoPago = () => {
     setLoading(false);
 
     if (error) {
-      toast.error("Não foi possível gerar a cobrança. Verifique o token e os dados.");
+      let message = "Não foi possível gerar a cobrança. Verifique o token e os dados.";
+      const ctx = (error as { context?: Response }).context;
+      try {
+        const body = await ctx?.clone().json();
+        if (body?.error) message = String(body.error);
+      } catch {
+        // mantém mensagem padrão
+      }
+      toast.error(message);
       return;
     }
     if ((data as { error?: string })?.error) {
