@@ -35,21 +35,48 @@ const MercadoPago = () => {
   };
 
   const createCharge = async () => {
+    const parsedAmount = Number(amount.replace(",", "."));
+
+    if (!accessToken.trim()) {
+      toast.error("Informe o Access Token do Mercado Pago");
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) {
+      toast.error("Informe um e-mail válido do pagador");
+      return;
+    }
+    if (!Number.isFinite(parsedAmount) || parsedAmount < 0.5) {
+      toast.error("Valor mínimo da cobrança é R$ 0,50");
+      return;
+    }
+    if (!description.trim()) {
+      toast.error("Informe uma descrição para a cobrança");
+      return;
+    }
+
     setLoading(true);
     setResult(null);
     const { data, error } = await supabase.functions.invoke("mercadopago-payment", {
       body: {
         accessToken: accessToken.trim(),
-        amount: Number(amount.replace(",", ".")),
-        description,
-        email,
+        amount: parsedAmount,
+        description: description.trim(),
+        email: email.trim(),
         cpf,
       },
     });
     setLoading(false);
 
     if (error) {
-      toast.error("Não foi possível gerar a cobrança. Verifique o token e os dados.");
+      let message = "Não foi possível gerar a cobrança. Verifique o token e os dados.";
+      const ctx = (error as { context?: Response }).context;
+      try {
+        const body = await ctx?.clone().json();
+        if (body?.error) message = String(body.error);
+      } catch {
+        // mantém mensagem padrão
+      }
+      toast.error(message);
       return;
     }
     if ((data as { error?: string })?.error) {
