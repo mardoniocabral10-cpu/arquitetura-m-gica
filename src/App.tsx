@@ -35,6 +35,7 @@ const App = () => (
               }
             />
             <Route path="/schema-generator" element={<SchemaGenerator />} />
+            <Route path="/mercado-pago" element={<MercadoPago />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
