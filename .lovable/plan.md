@@ -1,18 +1,17 @@
-# Confirmação automática do pagamento PIX (Mercado Pago)
+# Fundo branco
 
-## O que você vai ver
-- Depois de gerar o PIX em `/mercado-pago`, a página mostra o status "Aguardando pagamento".
-- Quando o cliente paga, o status muda sozinho para "Pago" (sem recarregar).
-- Botão "Verificar agora" para consultar o status manualmente.
-- Bloqueio de clique duplo no botão de gerar cobrança (evita PIX duplicado).
-
-## Como funciona
-1. Ao gerar a cobrança, o ID do pagamento é guardado na página.
-2. A página consulta o status a cada 5 segundos (por até 30 minutos) através de uma função do backend que pergunta ao Mercado Pago.
-3. Ao receber "approved", mostra a confirmação e para de consultar. "rejected"/"cancelled"/"expired" mostram aviso.
+## O que vai mudar
+- Deixar o fundo branco no login, dashboard e páginas públicas, nos temas claro e escuro.
+- Manter o texto vermelho atual e não alterar cobranças ou outras funcionalidades.
 
 ## Detalhes técnicos
-- Nova ação `status` na edge function `mercadopago-payment`: recebe `paymentId` + token e chama `GET /v1/payments/{id}`, devolvendo `status` e `status_detail`.
-- Polling no `src/pages/MercadoPago.tsx` com `setInterval` limpo ao desmontar/finalizar; estado `loading` desativa o botão de gerar.
-- Header `X-Idempotency-Key` único por cobrança na criação.
-- Webhook do Mercado Pago (notificação servidor-a-servidor) fica fora por enquanto, pois exigiria guardar o token no backend em vez do navegador.
+- Atualizar os tokens `--background`, `--card` e `--popover` para `0 0% 100%` em `:root` e `.dark` no CSS global.
+- Ajustar o teste de consistência do fundo para o novo valor e executar os testes relevantes.
+- Conferir as páginas em telas de computador e celular.
+
+## Sobre o erro informado
+- `src/hooks/use-mobile.tsx` já contém `import * as React from "react"`, e a configuração usa `react-jsx`.
+- Os registros disponíveis não reproduzem o TS2686; não há correção comprovada a aplicar nesse arquivo.
+- Se o erro reaparecer, investigar a mensagem completa antes de alterar o código.
+
+Nenhum código do aplicativo será alterado antes da aprovação deste plano, conforme solicitado no anexo.
